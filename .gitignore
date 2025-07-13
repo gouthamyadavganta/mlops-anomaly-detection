@@ -1,0 +1,7 @@
+.venv/
+mlruns/
+*.zip
+*.tar.gz
+*.pkl
+*.csv
+terraform/envs/dev/.terraform/

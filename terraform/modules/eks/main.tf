@@ -27,7 +27,7 @@ resource "aws_iam_role_policy_attachment" "eks_cluster_AmazonEKSClusterPolicy" {
 resource "aws_eks_cluster" "this" {
   name     = var.cluster_name
   role_arn = aws_iam_role.eks_cluster_role.arn
-  version  = "1.32" 
+  version  = "1.33" 
   vpc_config {
     subnet_ids              = var.private_subnet_ids
     endpoint_public_access  = false
@@ -59,7 +59,7 @@ resource "aws_eks_node_group" "this" {
   }
 
   instance_types = var.node_group_instance_types
-  ami_type       = "AL2_x86_64"
+  ami_type       = "AL2023_x86_64"
 
   remote_access {
     ec2_ssh_key = var.ssh_key_name

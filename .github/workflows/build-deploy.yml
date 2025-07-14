@@ -5,6 +5,7 @@ on:
     paths:
       - 'services/inference-api/**'
       - 'helm/inference-api/**'
+workflow_dispatch:
 
 jobs:
   build-and-push:

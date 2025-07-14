@@ -38,3 +38,8 @@ variable "cluster_name" {
   description = "Name of the EKS cluster"
   default     = "mlops-anomaly-dev-eks"
 }
+
+variable "ssh_key_name" {
+  description = "Name of the EC2 Key Pair to SSH into EKS nodes"
+  default     = "devops project1"
+}

@@ -8,28 +8,31 @@ on:
 
 jobs:
   tfsec:
-    name: tfsec - Terraform Security
+    name: 🔐 tfsec - Terraform Security
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Run tfsec
         uses: aquasecurity/tfsec-action@v1.0.0
         with:
           working-directory: terraform
 
   tflint:
-    name: tflint - Terraform Linting
+    name: 🧹 tflint - Terraform Linting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: terraform-linters/setup-tflint@v4
         with:
           tflint_version: v0.50.3
+
       - name: Run tflint
-        run: tflint --init && tflint terraform
+        run: tflint --init --chdir=terraform
 
   trivy:
-    name: Trivy - Docker Image Scan
+    name: 🐳 Trivy - Docker Image Scan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -41,7 +44,7 @@ jobs:
           ignore-unfixed: true
 
   codeql:
-    name: CodeQL - Code Scanning
+    name: 🔎 CodeQL - Code Scanning
     runs-on: ubuntu-latest
     permissions:
       security-events: write
@@ -60,3 +63,4 @@ jobs:
         uses: github/codeql-action/autobuild@v3
       - name: Analyze
         uses: github/codeql-action/analyze@v3
+

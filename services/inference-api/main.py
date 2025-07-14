@@ -31,3 +31,4 @@ def predict(data: InputData):
         return {"prediction": int(prediction)}  # -1 for anomaly, 1 for normal
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+# test trigger

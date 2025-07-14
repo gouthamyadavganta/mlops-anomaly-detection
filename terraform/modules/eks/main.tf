@@ -61,6 +61,10 @@ resource "aws_eks_node_group" "this" {
   instance_types = var.node_group_instance_types
   ami_type       = "AL2_x86_64"
 
+  remote_access {
+    ec2_ssh_key = var.ssh_key_name
+  }
+
   depends_on = [aws_eks_cluster.this]
 }
 

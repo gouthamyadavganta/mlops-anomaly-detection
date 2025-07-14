@@ -34,5 +34,6 @@ jobs:
         push: true
         tags: ${{ env.IMAGE_REPO }}:${{ env.IMAGE_TAG }}
 
-    - name: Trigger ArgoCD auto-sync (optional webhook)
-      run: echo "If ArgoCD is auto-syncing, no manual trigger is needed."
+    - name: Trigger ArgoCD auto-sync (optional)
+      run: echo "If ArgoCD is configured for auto-sync, this step is not required."
+

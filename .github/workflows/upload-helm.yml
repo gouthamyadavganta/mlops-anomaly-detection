@@ -1,0 +1,39 @@
+name: Upload Helm Chart to S3
+
+on:
+  push:
+    paths:
+      - 'helm/inference-api/**'
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-east-2
+  BUCKET_NAME: mlops-anomaly-dev-helm-chart-bucket
+  CHART_DIR: helm/inference-api
+
+jobs:
+  upload-helm:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: ⚙️ Set up Helm
+      run: |
+        curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+    - name: 📦 Package Helm chart
+      run: |
+        helm package $CHART_DIR --destination packaged
+        ls -lh packaged/
+
+    - name: 🗂️ Generate Helm index.yaml
+      run: |
+        helm repo index packaged --url https://${BUCKET_NAME}.s3.amazonaws.com/
+
+    - name: ☁️ Upload chart & index to S3
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        aws s3 cp packaged/ s3://$BUCKET_NAME/ --recursive

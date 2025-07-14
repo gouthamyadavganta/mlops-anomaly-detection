@@ -5,3 +5,43 @@ mlruns/
 *.pkl
 *.csv
 terraform/envs/dev/.terraform/
+
+# Python
+__pycache__/
+*.py[cod]
+*.log
+
+# Virtual environments
+.venv/
+venv/
+
+# ML data/models
+*.pkl
+*.csv
+mlruns/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+crash.log
+
+# Docker
+*.tar
+*.zip
+*.tar.gz
+
+# Helm
+*.tgz
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editor
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db

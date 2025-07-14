@@ -24,7 +24,7 @@ module "eks" {
   desired_size       = var.desired_size
   min_size           = var.min_size
   max_size           = var.max_size
-  ssh_key_name = var.ssh_key_name
+  ssh_key_name       = var.ssh_key_name
 }
 
 module "s3" {

@@ -71,6 +71,9 @@ model = IsolationForest(n_estimators=100, contamination=0.01, random_state=42)
 
 with mlflow.start_run(experiment_id=experiment_id) as run:
     model.fit(X_train)
+    import uuid
+    model._retrain_id = str(uuid.uuid4())
+
     joblib.dump(model, MODEL_FILENAME)
 
     y_pred = model.predict(X_test)

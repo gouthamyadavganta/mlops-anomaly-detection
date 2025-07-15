@@ -104,7 +104,7 @@ if USE_REMOTE_TRACKING:
         s3_client.head_bucket(Bucket=S3_BUCKET_NAME)
         s3_client.upload_file(MODEL_FILENAME, S3_BUCKET_NAME, f"models/{MODEL_FILENAME}")
         print(f"✅ model.pkl uploaded to s3://{S3_BUCKET_NAME}/models/{MODEL_FILENAME}")
-        print("✅ Triggered: Pipeline end-to-end test.")
+        print("✅ Triggered: Pipeline end-to-end test working.")
     except botocore.exceptions.ClientError as e:
         print(f"⚠️ Skipping S3 upload: {e.response['Error']['Message']}")
 

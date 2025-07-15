@@ -60,5 +60,6 @@ jobs:
         body: |
           This PR updates the Docker image tag after retraining the model.
         branch: auto/update-image-tag
+        base: main
         add-paths: |
           helm/inference-api/values.yaml

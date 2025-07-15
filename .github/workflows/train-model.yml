@@ -49,6 +49,16 @@ jobs:
         name: model-pkl
         path: services/inference-api/
 
+    - name: Debug: Echo Repo and Token Length
+      run: |
+        echo "Repo: https://github.com/gouthamyadavganta/mlops-anomaly-detection.git"
+        echo "Token Length: ${#GH_PAT}"
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
+
+    - name: Debug: Show Git Remote
+      run: git remote -v
+
     - name: Commit and push updated model.pkl
       env:
         GH_PAT: ${{ secrets.GH_PAT }}
@@ -57,5 +67,6 @@ jobs:
         git config --global user.email "github-actions@github.com"
         git add services/inference-api/model.pkl
         git commit -m "Auto: update model.pkl after retraining" || echo "No changes to commit"
-        git push https://x-access-token:${GH_PAT}@github.com/gouthamyadavganta/mlops-anomaly-detection.git HEAD:main
-
+        git remote set-url origin https://x-access-token:${GH_PAT}@github.com/gouthamyadavganta/mlops-anomaly-detection.git
+        git push origin HEAD:main
+    

@@ -49,12 +49,14 @@ jobs:
         name: model-pkl
         path: services/inference-api/
 
-    - name: Commit and push updated model.pkl
-      env:
-        FG_PAT: ${{ secrets.FG_PAT }}
-      run: |
-        git config --global user.name "gouthamyadavganta"
-        git config --global user.email "gantagouthamyadav1998@gmail.com"
-        git add services/inference-api/model.pkl
-        git commit -m "Auto: update model.pkl after retraining" || echo "No changes to commit"
-        git push https://${FG_PAT}@github.com/gouthamyadavganta/mlops-anomaly-detection.git HEAD:main
+    - name: Create Pull Request with updated model.pkl
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GH_PAT }}
+        commit-message: "Auto: update model.pkl after retraining"
+        title: "Auto PR: Update model.pkl"
+        body: |
+          This PR was created automatically by the train-model workflow.
+        branch: auto/update-model-pkl
+        add-paths: |
+          services/inference-api/model.pkl

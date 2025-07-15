@@ -51,7 +51,7 @@ jobs:
 
     - name: Commit and push updated model.pkl
       env:
-        GH_PAT: ${{ secrets.GH_PAT }}
+        FG_PAT: ${{ secrets.FG_PAT }}
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@github.com"

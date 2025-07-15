@@ -8,16 +8,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-push:
+  build-and-pr:
     runs-on: ubuntu-latest
 
     env:
       IMAGE_REPO: gantagouthamyadav/inference-api
-      IMAGE_TAG: latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
+    - name: Set up Git
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
@@ -28,13 +32,29 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
+    - name: Set image tag to short SHA
+      id: vars
+      run: echo "TAG_SHA=$(echo ${GITHUB_SHA} | cut -c1-7)" >> $GITHUB_ENV
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
         context: ./services/inference-api
         push: true
-        tags: ${{ env.IMAGE_REPO }}:${{ env.IMAGE_TAG }}
+        tags: ${{ env.IMAGE_REPO }}:${{ env.TAG_SHA }}
 
-    - name: Trigger ArgoCD auto-sync (optional)
-      run: echo "If ArgoCD is configured for auto-sync, this step is not required."
+    - name: Update image tag in Helm values.yaml
+      run: |
+        sed -i "s/tag: .*/tag: \"${TAG_SHA}\"/" helm/inference-api/values.yaml
+
+    - name: Create Pull Request
+      env:
+        GH_TOKEN: ${{ secrets.FG_PAT }}
+      run: |
+        BRANCH="auto/update-image-${TAG_SHA}"
+        git checkout -b $BRANCH
+        git add helm/inference-api/values.yaml
+        git commit -m "Auto: update image tag to ${TAG_SHA}" || echo "No changes"
+        git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git $BRANCH
+        gh pr create --title "Auto: update image tag to ${TAG_SHA}" --body "This PR updates the inference image tag to match commit SHA." --base main --head $BRANCH
 

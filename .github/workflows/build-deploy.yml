@@ -47,14 +47,14 @@ jobs:
       run: |
         sed -i "s/tag: .*/tag: \"${TAG_SHA}\"/" helm/inference-api/values.yaml
 
-    - name: Create Pull Request
-      env:
-        GH_TOKEN: ${{ secrets.FG_PAT }}
-      run: |
-        BRANCH="auto/update-image-${TAG_SHA}"
-        git checkout -b $BRANCH
-        git add helm/inference-api/values.yaml
-        git commit -m "Auto: update image tag to ${TAG_SHA}" || echo "No changes"
-        git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git $BRANCH
-        gh pr create --title "Auto: update image tag to ${TAG_SHA}" --body "This PR updates the inference image tag to match commit SHA." --base main --head $BRANCH
-
+    - name: Create Pull Request for updated values.yaml
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GH_PAT }}  # or FG_PAT
+        commit-message: "Auto: update model image tag"
+        title: "Auto PR: Update image tag in Helm chart"
+        body: |
+          This PR updates the Docker image tag after retraining the model.
+        branch: auto/update-image-tag
+        add-paths: |
+          helm/inference-api/values.yaml

@@ -1,0 +1,18 @@
+alertmanager:
+  persistentVolume:
+    enabled: false
+  statefulSet:
+    enabled: false
+
+server:
+  persistentVolume:
+    enabled: false
+
+nodeExporter:
+  persistentVolume:
+    enabled: false
+
+kubeStateMetrics:
+  persistentVolume:
+    enabled: false
+

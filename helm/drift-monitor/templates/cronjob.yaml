@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: drift-monitor
+spec:
+  schedule: {{ .Values.schedule }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: drift-monitor
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              env:
+                - name: AWS_ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: aws-creds
+                      key: aws_access_key_id
+                - name: AWS_SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: aws-creds
+                      key: aws_secret_access_key
+                - name: GH_PAT
+                  valueFrom:
+                    secretKeyRef:
+                      name: github-token
+                      key: GH_PAT
+                - name: MLFLOW_TRACKING_URI
+                  value: "http://aef27c7c07e634833bf412c822a538fe-2121813122.us-east-2.elb.amazonaws.com:5000"
+                - name: MLFLOW_S3_ENDPOINT_URL
+                  value: "https://s3.us-east-2.amazonaws.com"
+                - name: AWS_DEFAULT_REGION
+                  value: "us-east-2"
+          restartPolicy: OnFailure
+

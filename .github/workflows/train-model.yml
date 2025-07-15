@@ -10,6 +10,11 @@ jobs:
   train:
     runs-on: ubuntu-latest
 
+    env:
+      MLFLOW_TRACKING_URI: http://aef27c7c07e634833bf412c822a538fe-2121813122.us-east-2.elb.amazonaws.com:5000
+      MLFLOW_S3_ENDPOINT_URL: https://s3.us-east-2.amazonaws.com
+      AWS_DEFAULT_REGION: us-east-2
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -24,12 +29,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r model/requirements.txt
 
-    - name: Train model
+    - name: Train model and log to MLflow
       env:
-        MLFLOW_TRACKING_URI: file:./mlruns
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: us-east-2
       run: |
         cd model/scripts
         python train.py
@@ -39,4 +42,20 @@ jobs:
       with:
         name: model-pkl
         path: model/scripts/model.pkl
+
+    - name: Download model artifact to inference service directory
+      uses: actions/download-artifact@v4
+      with:
+        name: model-pkl
+        path: services/inference-api/
+
+    - name: Commit and push updated model.pkl
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+        git add services/inference-api/model.pkl
+        git commit -m "Auto: update model.pkl after retraining"
+        git push origin main
+      env:
+        GH_TOKEN: ${{ secrets.GH_PAT }}
 

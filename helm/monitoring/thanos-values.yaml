@@ -1,0 +1,49 @@
+alertmanager:
+  enabled: false
+
+ruler:
+  enabled: false
+
+objstoreConfig: |
+  type: FILESYSTEM
+  config:
+    directory: /data/thanos/store
+
+storegateway:
+  enabled: false
+
+compactor:
+  enabled: false
+  persistentVolume:
+    enabled: false
+
+query:
+  enabled: true          # Enable query component
+  persistence:
+    enabled: false       # No PVC, use emptyDir or memory
+
+queryFrontend:
+  enabled: true          # Enable query frontend (optional but recommended)
+  persistence:
+    enabled: false       # No PVC
+
+compact:
+  persistentVolume:
+    enabled: false
+
+store:
+  persistentVolume:
+    enabled: false
+
+prometheus:
+  persistentVolume:
+    enabled: false
+
+extraVolumes:
+  - name: data
+    emptyDir: {}
+
+extraVolumeMounts:
+  - name: data
+    mountPath: /data/thanos/store
+

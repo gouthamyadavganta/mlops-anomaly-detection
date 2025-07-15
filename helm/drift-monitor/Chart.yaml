@@ -1,0 +1,4 @@
+apiVersion: v2
+name: drift-monitor
+version: 0.1.0
+appVersion: "latest"

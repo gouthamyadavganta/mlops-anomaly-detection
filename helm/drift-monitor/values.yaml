@@ -1,0 +1,14 @@
+schedule: "0 * * * *"  # every hour
+
+image:
+  repository: gantagouthamyadav/drift-monitor
+  tag: latest
+  pullPolicy: Always
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi

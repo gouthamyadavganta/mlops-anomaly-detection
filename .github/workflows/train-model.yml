@@ -57,5 +57,4 @@ jobs:
         git config --global user.email "github-actions@github.com"
         git add services/inference-api/model.pkl
         git commit -m "Auto: update model.pkl after retraining" || echo "No changes to commit"
-        git remote set-url origin https://x-access-token:${GH_PAT}@github.com/gouthamyadavganta/mlops-anomaly-detection.git
-        git push origin HEAD:main
+        git push https://${{ secrets.FG_PAT }}@github.com/gouthamyadavganta/mlops-anomaly-detection.git HEAD:main

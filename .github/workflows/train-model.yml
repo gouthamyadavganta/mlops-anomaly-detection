@@ -70,3 +70,4 @@ jobs:
         git remote set-url origin https://x-access-token:${GH_PAT}@github.com/gouthamyadavganta/mlops-anomaly-detection.git
         git push origin HEAD:main
     
+# trigger display update

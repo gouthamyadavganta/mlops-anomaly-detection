@@ -58,5 +58,6 @@ jobs:
         body: |
           This PR was created automatically by the train-model workflow.
         branch: auto/update-model-pkl
+        base: main
         add-paths: |
           services/inference-api/model.pkl

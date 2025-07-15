@@ -47,10 +47,14 @@ jobs:
       run: |
         sed -i "s/tag: .*/tag: \"${TAG_SHA}\"/" helm/inference-api/values.yaml
 
+    - name: Create and switch to a new branch
+      run: |
+        git checkout -b auto/update-image-tag
+
     - name: Create Pull Request for updated values.yaml
       uses: peter-evans/create-pull-request@v5
       with:
-        token: ${{ secrets.GH_PAT }}  # or FG_PAT
+        token: ${{ secrets.GH_PAT }}  
         commit-message: "Auto: update model image tag"
         title: "Auto PR: Update image tag in Helm chart"
         body: |

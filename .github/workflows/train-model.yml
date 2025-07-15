@@ -53,8 +53,8 @@ jobs:
       env:
         FG_PAT: ${{ secrets.FG_PAT }}
       run: |
-        git config --global user.name "github-actions"
-        git config --global user.email "github-actions@github.com"
+        git config --global user.name "gouthamyadavganta"
+        git config --global user.email "gantagouthamyadav1998@gmail.com"
         git add services/inference-api/model.pkl
         git commit -m "Auto: update model.pkl after retraining" || echo "No changes to commit"
         git push https://${{ secrets.FG_PAT }}@github.com/gouthamyadavganta/mlops-anomaly-detection.git HEAD:main

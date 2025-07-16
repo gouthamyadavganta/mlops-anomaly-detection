@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: gantagouthamyadav/inference-api
-  tag: "a1df8e1"
+  tag: "07b92cc"
   pullPolicy: IfNotPresent
 
 service:

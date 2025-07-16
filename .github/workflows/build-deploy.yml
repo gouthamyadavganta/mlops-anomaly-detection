@@ -58,6 +58,9 @@ jobs:
         git fetch origin
         git checkout -b auto/update-image-tag origin/main
 
+    - name: Stage updated values.yaml
+      run: git add helm/inference-api/values.yaml
+
     - name: Create Pull Request for updated values.yaml
       uses: peter-evans/create-pull-request@v5
       with:

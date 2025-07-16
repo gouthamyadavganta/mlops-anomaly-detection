@@ -51,7 +51,7 @@ jobs:
 
     - name: Update image tag in Helm values.yaml
       run: |
-        sed -i "s/tag: .*/tag: \"${TAG_SHA}\"/" helm/inference-api/values.yaml
+        sed -i 's/^\([[:space:]]*tag:\).*/\1 "'"${TAG_SHA}"'"/' helm/inference-api/values.yaml
 
     - name: Fetch latest main and create/switch to new branch
       run: |

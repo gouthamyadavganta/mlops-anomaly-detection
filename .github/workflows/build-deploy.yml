@@ -40,7 +40,10 @@ jobs:
 
     - name: Set image tag to short SHA
       id: vars
-      run: echo "TAG_SHA=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+      run: |
+        TAG_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+        echo "TAG_SHA=$TAG_SHA" >> $GITHUB_ENV
+        echo "Exported TAG_SHA: $TAG_SHA"
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
@@ -51,7 +54,9 @@ jobs:
 
     - name: Update image tag in Helm values.yaml
       run: |
-        sed -i 's/^\([[:space:]]*tag:\).*/\1 "'"${TAG_SHA}"'"/' helm/inference-api/values.yaml
+        echo "Using TAG_SHA: $TAG_SHA"
+        sed -i "s/^\([[:space:]]*tag:\).*/\1 \"$TAG_SHA\"/" helm/inference-api/values.yaml
+        cat helm/inference-api/values.yaml
 
     - name: Fetch latest main and create/switch to new branch
       run: |

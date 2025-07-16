@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   build-and-pr:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && github.actor != 'github-actions'
     runs-on: ubuntu-latest
 
     env:

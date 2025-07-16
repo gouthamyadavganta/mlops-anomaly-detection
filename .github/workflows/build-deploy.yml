@@ -2,13 +2,19 @@ name: Build & Deploy Inference Service
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'services/inference-api/**'
       - 'helm/inference-api/**'
   workflow_dispatch:
 
+permissions:
+  contents: write  # Required for PR or commit
+
 jobs:
   build-and-pr:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     env:
@@ -34,7 +40,7 @@ jobs:
 
     - name: Set image tag to short SHA
       id: vars
-      run: echo "TAG_SHA=$(echo ${GITHUB_SHA} | cut -c1-7)" >> $GITHUB_ENV
+      run: echo "TAG_SHA=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
@@ -49,14 +55,14 @@ jobs:
 
     - name: Fetch latest main and create/switch to new branch
       run: |
-        git fetch origin 
+        git fetch origin
         git checkout -b auto/update-image-tag origin/main
 
     - name: Create Pull Request for updated values.yaml
       uses: peter-evans/create-pull-request@v5
       with:
-        token: ${{ secrets.GH_PAT }}  
-        commit-message: "Auto: update model image tag"
+        token: ${{ secrets.GH_PAT }}
+        commit-message: "Auto: update model image tag to ${{ env.TAG_SHA }}"
         title: "Auto PR: Update image tag in Helm chart"
         body: |
           This PR updates the Docker image tag after retraining the model.
@@ -64,3 +70,4 @@ jobs:
         base: main
         add-paths: |
           helm/inference-api/values.yaml
+

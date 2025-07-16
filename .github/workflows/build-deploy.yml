@@ -10,11 +10,12 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # Required for PR or commit
+  contents: write
 
 jobs:
   build-and-pr:
-    if: github.ref == 'refs/heads/main' && github.actor != 'github-actions'
+    # Run only on push to main from human (not GitHub Actions bot)
+    if: github.event_name == 'workflow_dispatch' || (github.ref == 'refs/heads/main' && github.actor != 'github-actions[bot]')
     runs-on: ubuntu-latest
 
     env:
@@ -54,26 +55,17 @@ jobs:
 
     - name: Update image tag in Helm values.yaml
       run: |
-        echo "Using TAG_SHA: $TAG_SHA"
-        sed -i "s/^\([[:space:]]*tag:\).*/\1 \"$TAG_SHA\"/" helm/inference-api/values.yaml
+        sed -i "s/^\([[:space:]]*tag:\).*/\1 \"${TAG_SHA}\"/" helm/inference-api/values.yaml
         cat helm/inference-api/values.yaml
-
-    - name: Fetch latest main and create/switch to new branch
-      run: |
-        git fetch origin
-        git checkout -b auto/update-image-tag origin/main
-
-    - name: Stage updated values.yaml
-      run: git add helm/inference-api/values.yaml
 
     - name: Create Pull Request for updated values.yaml
       uses: peter-evans/create-pull-request@v5
       with:
         token: ${{ secrets.GH_PAT }}
         commit-message: "Auto: update model image tag to ${{ env.TAG_SHA }}"
-        title: "Auto PR: Update image tag in Helm chart"
+        title: "Auto PR: Update image tag to ${{ env.TAG_SHA }}"
         body: |
-          This PR updates the Docker image tag after retraining the model.
+          This PR updates the Docker image tag in Helm chart after a model update.
         branch: auto/update-image-tag
         base: main
         add-paths: |

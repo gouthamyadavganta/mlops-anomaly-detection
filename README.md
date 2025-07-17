@@ -1,4 +1,6 @@
+
 # 🚀 Real-Time Anomaly Detection – MLOps System
+
 
 This project demonstrates a production-ready, cloud-native MLOps pipeline that automates the full lifecycle of a real-time anomaly detection model using modern DevOps, GitOps, and ML tooling. It is designed to:
 
@@ -81,6 +83,8 @@ This project demonstrates a production-ready, cloud-native MLOps pipeline that a
 - ✅ **security.yml**  
   - Runs tfsec, TFLint, Trivy, and CodeQL  
 
+![GitHub Actions](screenshots/git-hub-actions.png)
+
 ---
 
 ## 🛠️ Infrastructure with Terraform
@@ -97,6 +101,7 @@ This project demonstrates a production-ready, cloud-native MLOps pipeline that a
     - `model.pkl`
     - Helm chart repository
 
+![AWS Dashboard](screenshots/aws-Dashboard.png)
 ---
 
 ## 🚀 Deployment via ArgoCD + Helm
@@ -138,6 +143,19 @@ This project demonstrates a production-ready, cloud-native MLOps pipeline that a
 
 ![MLflow](screenshots/Mlflow.png)
 
+
+### 📊 Grafana Dashboards
+
+#### Cluster Metrics
+![Grafana Cluster Dashboard](screenshots/Grafana-cluster-dashboard1.png)
+
+#### FastAPI Monitoring
+![Grafana FastAPI Dashboard](screenshots/Grafana-fast-api-dashboard.png)
+
+#### Service Endpoint Overview
+![Grafana Service Endpoint Dashboard](screenshots/Grafana-service-endpoint-dashboard.png)
+
+
 ---
 
 ## 🧪 FastAPI Inference + Drift Logic
@@ -145,7 +163,7 @@ This project demonstrates a production-ready, cloud-native MLOps pipeline that a
 - REST endpoint accepts input features
 - Returns prediction + drift detection score
 
-![FastAPI](screenshots/git-repo.png)
+![FastAPI](screenshots/FastAPI.png)
 
 ---
 
@@ -164,32 +182,38 @@ mlops-anomaly-detection/
 │   └── envs/dev/
 ├── simulate_stream.py       # Mock streaming simulator
 ├── screenshots/             # Proof of working implementation
-✅ Results
-✅ Fully automated MLOps lifecycle
+```
 
-✅ Drift triggers retraining via Cron + GitHub API
+![GitHub Repo](screenshots/Git-repo.png)
 
-✅ Monitoring and alerting integrated
+---
 
-✅ Secure infrastructure and container scanning
+## ✅ Results
 
-✅ GitOps delivery with Helm + ArgoCD
+- ✅ Fully automated MLOps lifecycle
+- ✅ Drift triggers retraining via Cron + GitHub API
+- ✅ Monitoring and alerting integrated
+- ✅ Secure infrastructure and container scanning
+- ✅ GitOps delivery with Helm + ArgoCD
+- ✅ Clean, reproducible, scalable architecture
 
-✅ Clean, reproducible, scalable architecture
+---
 
-🧯 Troubleshooting
-Area	Problem	Fix
-MLflow	Upload fails to S3	Check AWS credentials via Kubernetes Secret
-ArgoCD	Not syncing	Ensure Helm PR is merged and chart pushed
-Grafana	Login issue	Reset Bitnami credentials
-CronJob	Not triggering	Run kubectl get cronjob -n mlops
-GitHub PR	Not created	Ensure GH_PAT is set in GitHub secrets
+## 🧯 Troubleshooting
 
-🧪 Local Testing
-bash
-Always show details
+| Area      | Problem                         | Fix                                             |
+|-----------|----------------------------------|--------------------------------------------------|
+| MLflow    | Upload fails to S3               | Check AWS credentials via Kubernetes Secret     |
+| ArgoCD    | Not syncing                      | Ensure Helm PR is merged and chart pushed       |
+| Grafana   | Login issue                      | Reset Bitnami credentials                       |
+| CronJob   | Not triggering                   | Run `kubectl get cronjob -n mlops`              |
+| GitHub PR | Not created                      | Ensure `GH_PAT` is set in GitHub secrets        |
 
-Copy
+---
+
+## 🧪 Local Testing
+
+```bash
 # Clone the project
 git clone https://github.com/gouthamyadavganta/mlops-anomaly-detection.git
 cd mlops-anomaly-detection
@@ -203,31 +227,50 @@ uvicorn main:app --reload
 
 # Simulate streaming
 python simulate_stream.py
-🧠 What Can Be Improved
-Add pytest unit tests for FastAPI and model
+```
 
-Use IRSA instead of Kubernetes secrets for AWS
+---
 
-Replace SQLite with PostgreSQL (RDS) for MLflow
+## 🧠 What Can Be Improved
 
-Add Kafka or Kinesis for real streaming
+- Add pytest unit tests for FastAPI and model
+- Use IRSA instead of Kubernetes secrets for AWS
+- Replace SQLite with PostgreSQL (RDS) for MLflow
+- Add Kafka or Kinesis for real streaming
+- Add load testing with Locust or k6
 
-Add load testing with Locust or k6
+---
 
-📚 References
-Terraform
+## 📚 References
 
-MLflow
+- Terraform  
+- MLflow  
+- FastAPI  
+- ArgoCD  
+- Prometheus  
+- Grafana  
+- Trivy  
+- CodeQL
 
-FastAPI
 
-ArgoCD
 
-Prometheus
 
-Grafana
 
-Trivy
 
-CodeQL
-"""
+
+
+
+
+
+
+
+
+> Feel free to reach out about MLOps, DevSecOps, cloud infrastructure, or collaboration opportunities.
+
+## 📬 Contact
+
+💻 **Author:** Goutham Yadav Ganta  
+🌐 **GitHub:** [gouthamyadavganta](https://github.com/gouthamyadavganta)  
+💼 **LinkedIn:** [www.linkedin.com/in/goutham-g-70408b228]  
+📧 **Email:** gouthamyganta@gmail.com  
+📍 **Location:** United States  

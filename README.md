@@ -1,191 +1,233 @@
 # 🚀 Real-Time Anomaly Detection – MLOps System
 
-A **production-grade, cloud-native MLOps pipeline** that automates the full lifecycle of a real-time anomaly detection model using GitHub Actions, ArgoCD, MLflow, FastAPI, Terraform, Prometheus/Grafana, and more.
+This project demonstrates a production-ready, cloud-native MLOps pipeline that automates the full lifecycle of a real-time anomaly detection model using modern DevOps, GitOps, and ML tooling. It is designed to:
 
-![System Architecture](screenshots/system-design-flow-chart.png)
-
----
-
-## 📌 Overview
-
-This project showcases:
-
-- Full MLOps automation: train → track → deploy
-- Drift detection triggering retraining
-- GitOps-based delivery via ArgoCD
-- Real-time inference + monitoring + alerting
-- Cloud-native AWS infrastructure provisioned by Terraform
-- CI/CD pipelines with GitHub Actions
-- Multi-layer security scans integrated into the pipeline
+- Showcase end-to-end MLOps expertise to recruiters, engineers, and hiring managers  
+- Automate everything from training to deployment using CI/CD and GitHub Actions  
+- Enable retraining and redeployment based on drift detection  
+- Integrate observability and multi-layer security scanning  
+- Use only scalable, industry-standard, cloud-native tools
 
 ---
 
 ## 🧰 Tech Stack
 
-| Category         | Tool                          |
-|------------------|-------------------------------|
-| **Infra**        | AWS (EKS, S3, IAM, VPC), Terraform |
-| **CI/CD**        | GitHub Actions                |
-| **GitOps**       | ArgoCD + Helm                 |
-| **Serving**      | FastAPI + IsolationForest     |
-| **Tracking**     | MLflow + S3                   |
-| **Monitoring**   | Prometheus + Grafana          |
-| **Security**     | tfsec, TFLint, Trivy, CodeQL  |
-| **Container**    | Docker + Docker Hub           |
+| Category         | Tool                               | Usage                                  |
+|------------------|------------------------------------|----------------------------------------|
+| Cloud            | AWS (EKS, S3, IAM, VPC)            | Hosting, storage, roles                |
+| IaC              | Terraform                          | VPC, EKS, IAM, S3 (with remote backend)|
+| CI/CD            | GitHub Actions                     | Model training, image build, chart publishing |
+| GitOps           | ArgoCD                             | Helm-based continuous delivery         |
+| ML/Serving       | IsolationForest + FastAPI          | Anomaly detection + REST API           |
+| Tracking         | MLflow + S3 + SQLite               | Logs metrics/artifacts, tracks versions|
+| Containerization | Docker + Docker Hub                | Build & registry                       |
+| Monitoring       | Prometheus + Grafana               | Metrics, dashboards, alerts            |
+| Drift Detection  | Custom logic + CronJob             | Detects drift and triggers retraining  |
+| Security         | tfsec, TFLint, Trivy, CodeQL       | Infra, container, and code scanning    |
 
 ---
 
 ## 📐 System Architecture
 
-![System Design](screenshots/system-design-flow-chart.png)
+![System Architecture](screenshots/system-design-flow-chart.png)
 
 ---
 
-## 🔄 MLOps Flow Overview
+## 🔄 End-to-End Pipeline
 
-1. `train-model.yml` runs via CronJob or manual dispatch
-2. Model logs to MLflow, uploads to S3, PR updates `model.pkl`
-3. `build-deploy.yml` builds Docker image, PR updates `helm/values.yaml`
-4. `upload-helm.yml` uploads Helm chart to S3
-5. ArgoCD syncs the chart, deploys new inference pod to EKS
-
----
-
-## ⚙️ GitHub Actions Workflows
-
-| Workflow           | Trigger                        | Purpose |
-|--------------------|--------------------------------|---------|
-| `terraform.yml`    | push / manual                  | Infra plan & apply |
-| `train-model.yml`  | CronJob or manual              | Train model + log to MLflow |
-| `build-deploy.yml` | PR merge to model.pkl / app    | Build & push Docker image |
-| `upload-helm.yml`  | Helm chart change              | Upload to S3 chart repo |
-| `security.yml`     | every push                     | tfsec, tflint, trivy, CodeQL |
-
-![GitHub Actions](screenshots/git-hub-actions.png)
+1. `train-model.yml` runs on schedule or manual dispatch
+2. Trains IsolationForest model
+3. Logs to MLflow and uploads artifacts to S3
+4. Creates PR to update `model.pkl` in inference service
+5. Merge triggers `build-deploy.yml`
+6. Builds and pushes Docker image to Docker Hub
+7. Creates PR to update image tag in `helm/values.yaml`
+8. Merge triggers `upload-helm.yml`
+9. Uploads Helm chart and index to S3 bucket
+10. ArgoCD watches S3 chart index and syncs deployment to EKS
 
 ---
 
-## 🖥️ Key Implementation Screenshots
+## ⚙️ CI/CD Workflows
 
-### ✅ ArgoCD – GitOps in Action
-
-![ArgoCD UI](screenshots/ARGOCD.png)
-
----
-
-### 📈 Prometheus – Metrics Collection
-
-![Prometheus](screenshots/prometheus.png)
+| Workflow           | Trigger                         | Purpose                                      |
+|--------------------|----------------------------------|----------------------------------------------|
+| terraform.yml      | Push to terraform/** or manual  | Plan/apply infrastructure changes            |
+| train-model.yml    | Manual dispatch or Cron         | Train model, log to MLflow, PR update model.pkl |
+| build-deploy.yml   | Push to inference-api or model  | Build/push Docker image, PR update Helm tag  |
+| upload-helm.yml    | Helm chart update               | Upload Helm chart and index to S3            |
+| security.yml       | Every push to main              | tfsec, TFLint, Trivy, CodeQL scans           |
 
 ---
 
-### 📘 MLflow – Model Tracking
+## 📦 Breakdown of Workflow Responsibilities
 
-![MLflow UI](screenshots/Mlflow.png)
+- ✅ **train-model.yml**  
+  - Trains model with `train.py`  
+  - Logs to MLflow and uploads to S3  
+  - Creates PR to update `model.pkl`  
+
+- ✅ **build-deploy.yml**  
+  - Builds and pushes Docker image to Docker Hub  
+  - Opens PR to update Helm image tag  
+
+- ✅ **upload-helm.yml**  
+  - Packages and uploads Helm chart to S3  
+
+- ✅ **terraform.yml**  
+  - Formats, initializes, validates, and plans infra  
+  - Applies infra manually via GitHub Actions approval  
+
+- ✅ **security.yml**  
+  - Runs tfsec, TFLint, Trivy, and CodeQL  
 
 ---
 
-### 🧪 FastAPI Inference & Drift Detection
+## 🛠️ Infrastructure with Terraform
 
-![FastAPI Swagger UI](screenshots/FastAPI.png)
+- Modularized under `terraform/modules/`
+- `terraform/envs/dev/` handles:
+  - Remote state in S3
+  - State locking via DynamoDB
+- Provisions:
+  - VPC, subnets, NAT, IGW
+  - IAM roles
+  - EKS cluster + node group
+  - S3 buckets for:
+    - `model.pkl`
+    - Helm chart repository
 
 ---
 
-### 🐳 Docker Hub – Container Registry
+## 🚀 Deployment via ArgoCD + Helm
+
+- Helm charts in `helm/inference-api/`
+- Image tag updates via PR → merged
+- ArgoCD tracks `argocd/inference-app.yaml`
+- ArgoCD syncs deployment after chart update
+
+![ArgoCD](screenshots/ARGOCD.png)
+
+---
+
+## 🐳 Docker
+
+- Two Dockerfiles:
+  - `services/inference-api/`
+  - `model/scripts/train.py`
+- Images pushed to: `gantagouthamyadav/inference-api`
 
 ![Docker Hub](screenshots/docker-hub.png)
 
 ---
 
-### ☁️ AWS Cloud Infrastructure
+## 📊 Monitoring with Prometheus + Grafana
 
-![AWS Dashboard](screenshots/aws-dashboard.png)
+- Prometheus scrapes `/metrics` from FastAPI
+- Grafana visualizes alerts, container metrics, and usage
+
+![Prometheus](screenshots/prometheus.png)
 
 ---
 
-## 📦 Folder Structure
+## 📘 MLflow Tracking
+
+- Logs parameters, metrics, and artifacts
+- Stores models in S3
+- Uses SQLite for lightweight backend
+
+![MLflow](screenshots/Mlflow.png)
+
+---
+
+## 🧪 FastAPI Inference + Drift Logic
+
+- REST endpoint accepts input features
+- Returns prediction + drift detection score
+
+![FastAPI](screenshots/git-repo.png)
+
+---
+
+## 📂 Folder Structure
 
 ```bash
 mlops-anomaly-detection/
-├── .github/workflows/       # GitHub Actions pipelines
-├── argocd/                  # ArgoCD application manifest
-├── helm/                    # Helm chart for FastAPI
-├── model/scripts/train.py   # Training pipeline
-├── services/inference-api/  # Inference microservice (FastAPI)
-├── terraform/               # IaC modules & envs
+├── .github/workflows/       # GitHub Actions: CI/CD, Security
+├── argocd/                  # ArgoCD app manifest
+├── helm/                    # Helm chart (FastAPI)
+├── model/                   # Training pipeline
+│   └── scripts/train.py
+├── services/                # Inference API (FastAPI)
+├── terraform/               # IaC (modular)
 │   ├── modules/
 │   └── envs/dev/
 ├── simulate_stream.py       # Mock streaming simulator
-🔁 Drift Detection & Retraining
-Triggered via Kubernetes CronJob
+├── screenshots/             # Proof of working implementation
+✅ Results
+✅ Fully automated MLOps lifecycle
 
-GitHub Actions retrains model → updates model.pkl
+✅ Drift triggers retraining via Cron + GitHub API
 
-Pipeline automatically redeploys updated service via GitOps
+✅ Monitoring and alerting integrated
+
+✅ Secure infrastructure and container scanning
+
+✅ GitOps delivery with Helm + ArgoCD
+
+✅ Clean, reproducible, scalable architecture
+
+🧯 Troubleshooting
+Area	Problem	Fix
+MLflow	Upload fails to S3	Check AWS credentials via Kubernetes Secret
+ArgoCD	Not syncing	Ensure Helm PR is merged and chart pushed
+Grafana	Login issue	Reset Bitnami credentials
+CronJob	Not triggering	Run kubectl get cronjob -n mlops
+GitHub PR	Not created	Ensure GH_PAT is set in GitHub secrets
 
 🧪 Local Testing
 bash
+Always show details
+
 Copy
-Edit
-# Clone repo
+# Clone the project
 git clone https://github.com/gouthamyadavganta/mlops-anomaly-detection.git
 cd mlops-anomaly-detection
 
-# Run model trainer
+# Train model locally
 python model/scripts/train.py
 
-# Run FastAPI locally
+# Start FastAPI app
 cd services/inference-api
 uvicorn main:app --reload
 
-# Simulate real-time input
+# Simulate streaming
 python simulate_stream.py
-✅ Outcomes
-✅ GitOps deployment with ArgoCD
+🧠 What Can Be Improved
+Add pytest unit tests for FastAPI and model
 
-✅ Retraining via Cron + GitHub API
+Use IRSA instead of Kubernetes secrets for AWS
 
-✅ Logs & artifacts tracked with MLflow
+Replace SQLite with PostgreSQL (RDS) for MLflow
 
-✅ Real-time REST API for prediction + drift
+Add Kafka or Kinesis for real streaming
 
-✅ Monitoring and alerting with Grafana
-
-✅ Dockerized pipeline with CI/CD
-
-✅ End-to-end secured: tfsec, Trivy, CodeQL
-
-💡 Future Enhancements
- Replace MLflow SQLite with RDS (PostgreSQL)
-
- Integrate Kafka/Kinesis for live streaming
-
- Use IRSA for secure AWS credentials
-
- Add pytest-based unit tests
-
- Add load testing with Locust
-
-👥 Audience
-🎯 Recruiters & Hiring Managers – Demonstrates real DevSecOps & MLOps skills
-
-🧑‍💻 Engineers – Cloud-native GitOps pipeline reference
-
-🤝 Contributors – Modular and reusable project structure
+Add load testing with Locust or k6
 
 📚 References
+Terraform
+
 MLflow
 
 FastAPI
 
-Terraform
+ArgoCD
 
 Prometheus
 
 Grafana
 
-ArgoCD
-
 Trivy
 
 CodeQL
+"""

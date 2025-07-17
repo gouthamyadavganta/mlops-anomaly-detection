@@ -1,4 +1,3 @@
-
 # 🚀 Real-Time Anomaly Detection – MLOps System
 
 A **production-grade, cloud-native MLOps pipeline** that automates the full lifecycle of a real-time anomaly detection model using GitHub Actions, ArgoCD, MLflow, FastAPI, Terraform, Prometheus/Grafana, and more.
@@ -117,21 +116,17 @@ mlops-anomaly-detection/
 │   ├── modules/
 │   └── envs/dev/
 ├── simulate_stream.py       # Mock streaming simulator
-```
+🔁 Drift Detection & Retraining
+Triggered via Kubernetes CronJob
 
----
+GitHub Actions retrains model → updates model.pkl
 
-## 🔁 Drift Detection & Retraining
+Pipeline automatically redeploys updated service via GitOps
 
-- Triggered via Kubernetes CronJob
-- GitHub Actions retrains model → updates `model.pkl`
-- Pipeline automatically redeploys updated service via GitOps
-
----
-
-## 🧪 Local Testing
-
-```bash
+🧪 Local Testing
+bash
+Copy
+Edit
 # Clone repo
 git clone https://github.com/gouthamyadavganta/mlops-anomaly-detection.git
 cd mlops-anomaly-detection
@@ -145,47 +140,52 @@ uvicorn main:app --reload
 
 # Simulate real-time input
 python simulate_stream.py
-```
+✅ Outcomes
+✅ GitOps deployment with ArgoCD
 
----
+✅ Retraining via Cron + GitHub API
 
-## ✅ Outcomes
+✅ Logs & artifacts tracked with MLflow
 
-- ✅ GitOps deployment with ArgoCD
-- ✅ Retraining via Cron + GitHub API
-- ✅ Logs & artifacts tracked with MLflow
-- ✅ Real-time REST API for prediction + drift
-- ✅ Monitoring and alerting with Grafana
-- ✅ Dockerized pipeline with CI/CD
-- ✅ End-to-end secured: tfsec, Trivy, CodeQL
+✅ Real-time REST API for prediction + drift
 
----
+✅ Monitoring and alerting with Grafana
 
-## 💡 Future Enhancements
+✅ Dockerized pipeline with CI/CD
 
-- [ ] Replace MLflow SQLite with RDS (PostgreSQL)
-- [ ] Integrate Kafka/Kinesis for live streaming
-- [ ] Use IRSA for secure AWS credentials
-- [ ] Add pytest-based unit tests
-- [ ] Add load testing with Locust
+✅ End-to-end secured: tfsec, Trivy, CodeQL
 
----
+💡 Future Enhancements
+ Replace MLflow SQLite with RDS (PostgreSQL)
 
-## 👥 Audience
+ Integrate Kafka/Kinesis for live streaming
 
-- 🎯 **Recruiters & Hiring Managers** – Demonstrates real DevSecOps & MLOps skills
-- 🧑‍💻 **Engineers** – Cloud-native GitOps pipeline reference
-- 🤝 **Contributors** – Modular and reusable project structure
+ Use IRSA for secure AWS credentials
 
----
+ Add pytest-based unit tests
 
-## 📚 References
+ Add load testing with Locust
 
-- [MLflow](https://mlflow.org)
-- [FastAPI](https://fastapi.tiangolo.com/)
-- [Terraform](https://developer.hashicorp.com/terraform)
-- [Prometheus](https://prometheus.io/)
-- [Grafana](https://grafana.com/)
-- [ArgoCD](https://argo-cd.readthedocs.io/)
-- [Trivy](https://aquasecurity.github.io/trivy/)
-- [CodeQL](https://codeql.github.com/)
+👥 Audience
+🎯 Recruiters & Hiring Managers – Demonstrates real DevSecOps & MLOps skills
+
+🧑‍💻 Engineers – Cloud-native GitOps pipeline reference
+
+🤝 Contributors – Modular and reusable project structure
+
+📚 References
+MLflow
+
+FastAPI
+
+Terraform
+
+Prometheus
+
+Grafana
+
+ArgoCD
+
+Trivy
+
+CodeQL

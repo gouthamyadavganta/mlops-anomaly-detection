@@ -1,0 +1,24 @@
+{
+  "module": "helm",
+  "outdir": "/home/ubuntu/snapcheck-cli/.snapcheck",
+  "helm_version": "v3.18.4+gd80839c",
+  "status": "OK",
+  "releases": [
+    {
+      "name": "metrics-server",
+      "namespace": "kube-system",
+      "revision": "1",
+      "updated": "2025-08-14 07:03:54.400643766 +0000 UTC",
+      "status": "deployed",
+      "chart": "metrics-server-3.13.0",
+      "app_version": "0.8.0"
+    }
+  ],
+  "messages": [
+    "1 releases (Helm v3.18.4+gd80839c)",
+    "kube-system/metrics-server: chart metrics-server version 3.13.0 (status deployed) \u2192 latest 3.13.0 (up-to-date); appVersion 0.8.0"
+  ],
+  "outdated_count": 0,
+  "failed_count": 0,
+  "total": 1
+}

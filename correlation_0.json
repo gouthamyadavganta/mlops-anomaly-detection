@@ -1,0 +1,11 @@
+{
+  "title": "Root Cause Correlation",
+  "status": "\u2705 OK",
+  "messages": [
+    "Correlation skipped (missing or non-linkable CI/CD or GitOps signals).",
+    "Looked in memory types: ci_cd=AuditResult, gitops=NoneType",
+    "Also checked disk in OUTDIR=/home/ubuntu/snapcheck-cli/.snapcheck",
+    "Found CI files: ci_cd.json",
+    "Found GitOps files: gitops-20250814-083515.json, gitops-20250814-084017.json, gitops-20250814-084249.json, gitops-20250814-100221.json, gitops-20250814-103034.json, gitops-20250814-104649.json, gitops_0.json"
+  ]
+}

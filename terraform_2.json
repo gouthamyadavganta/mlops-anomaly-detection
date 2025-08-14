@@ -1,0 +1,22 @@
+{
+  "title": "Terraform Resource Types",
+  "status": "\u2705 OK",
+  "messages": [
+    "aws_eks_cluster: 1",
+    "aws_eks_node_group: 1",
+    "aws_iam_role: 2",
+    "aws_iam_role_policy_attachment: 4",
+    "aws_kms_key: 1",
+    "aws_s3_bucket: 2",
+    "aws_s3_bucket_public_access_block: 2",
+    "aws_s3_bucket_server_side_encryption_configuration: 2",
+    "aws_availability_zones: 1",
+    "aws_eip: 1",
+    "aws_internet_gateway: 1",
+    "aws_nat_gateway: 1",
+    "aws_route_table: 2",
+    "aws_route_table_association: 2",
+    "aws_subnet: 2",
+    "aws_vpc: 1"
+  ]
+}

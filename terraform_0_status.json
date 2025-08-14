@@ -1,0 +1,7 @@
+{
+  "title": "Terraform Cost Estimate",
+  "status": "\u2705 OK",
+  "messages": [
+    "$10/mo (rough estimate based on resource types)"
+  ]
+}

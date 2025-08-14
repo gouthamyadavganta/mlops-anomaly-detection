@@ -1,0 +1,8 @@
+{
+  "title": "Helm Audit",
+  "status": "\u2705 OK",
+  "messages": [
+    "1 releases (Helm v3.18.4+gd80839c)",
+    "kube-system/metrics-server: chart metrics-server version 3.13.0 (status deployed) \u2192 latest 3.13.0 (up-to-date); appVersion 0.8.0"
+  ]
+}

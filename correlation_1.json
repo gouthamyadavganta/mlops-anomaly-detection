@@ -1,0 +1,7 @@
+{
+  "title": "Infra Drift Detection",
+  "status": "\u2705 OK",
+  "messages": [
+    "Terraform state not found (skipped drift check)."
+  ]
+}

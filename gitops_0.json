@@ -1,0 +1,17 @@
+{
+  "title": "GitOps - ArgoCD App: inference-service",
+  "status": "\u2705 OK",
+  "messages": [
+    "Sync Status: Synced",
+    "Health Status: Healthy",
+    "Auto-Sync: Enabled",
+    "Self-Heal: Enabled",
+    "Revision: 33395a90 | Target: HEAD",
+    "Last Sync: 2025-08-12T04:42:58Z",
+    "Auto Syncs: 2, Manual Syncs: 0",
+    "Drifted Resources: 0",
+    "Author: unknown",
+    "Linked to CI revision: 33395a90",
+    "Stub: values.yaml drift not detected"
+  ]
+}

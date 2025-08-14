@@ -1,0 +1,19 @@
+{
+  "title": "AWS Cost Analysis",
+  "status": "\u2705 OK",
+  "messages": [
+    "\ud83e\uddfe Total cost for last month: $17.46 \ud83d\udfe2",
+    "\ud83d\udccd AWS Region: us-east-2",
+    "\ud83d\udd27 Resource Types: 16",
+    "\ud83e\uddf1 EC2 Instance Types: N/A",
+    "\u2022 Amazon Elastic Compute Cloud - Compute \u27a4 $   7.27 \ud83d\udfe2",
+    "\u2022 Amazon Elastic Container Service for Kubernetes \u27a4 $   5.63 \ud83d\udfe2",
+    "\u2022 EC2 - Other                    \u27a4 $   2.69 \ud83d\udfe2",
+    "\u2022 Amazon Virtual Private Cloud   \u27a4 $   1.79 \ud83d\udfe2",
+    "\u2022 AWS Key Management Service     \u27a4 $   0.08 \ud83d\udfe2",
+    "\u2022 AWS Cost Explorer              \u27a4 $   0.01 \ud83d\udfe2",
+    "\u2022 Amazon Elastic Load Balancing  \u27a4 $   0.00 \ud83d\udfe2",
+    "\u2022 Amazon DynamoDB                \u27a4 $   0.00 \ud83d\udfe2",
+    "..."
+  ]
+}

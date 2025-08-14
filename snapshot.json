@@ -1,0 +1,152 @@
+{
+  "terraform": [
+    {
+      "title": "Terraform Cost Estimate",
+      "status": "\u2705 OK",
+      "messages": [
+        "$10/mo (rough estimate based on resource types)"
+      ]
+    },
+    {
+      "title": "State Age",
+      "status": "\u2705 OK",
+      "messages": [
+        "2 days"
+      ]
+    },
+    {
+      "title": "Terraform Resource Types",
+      "status": "\u2705 OK",
+      "messages": [
+        "aws_eks_cluster: 1",
+        "aws_eks_node_group: 1",
+        "aws_iam_role: 2",
+        "aws_iam_role_policy_attachment: 4",
+        "aws_kms_key: 1",
+        "aws_s3_bucket: 2",
+        "aws_s3_bucket_public_access_block: 2",
+        "aws_s3_bucket_server_side_encryption_configuration: 2",
+        "aws_availability_zones: 1",
+        "aws_eip: 1",
+        "aws_internet_gateway: 1",
+        "aws_nat_gateway: 1",
+        "aws_route_table: 2",
+        "aws_route_table_association: 2",
+        "aws_subnet: 2",
+        "aws_vpc: 1"
+      ]
+    }
+  ],
+  "kubernetes": {
+    "title": "Kubernetes Cluster Audit",
+    "status": "\ud83d\udfe1 Warning",
+    "messages": [
+      "\ud83d\udcc8 Metrics API OK: `kubectl top nodes` succeeded.",
+      "\ud83e\uddea DNS OK inside pod aws-node-2gfb7 (aws-node)",
+      "\ud83d\udd10 Privileged containers: kube-system/aws-node-2gfb7 (expected system pod), kube-system/aws-node-kdzzv (expected system pod), kube-system/kube-proxy-bcdbc (expected system pod), kube-system/kube-proxy-c4wq4 (expected system pod)",
+      "\u26a0\ufe0f HostPath volumes: kube-system/aws-node-2gfb7 uses hostPath (expected system pod), kube-system/aws-node-2gfb7 uses hostPath (expected system pod), kube-system/aws-node-2gfb7 uses hostPath (expected system pod), kube-system/aws-node-2gfb7 uses hostPath (expected system pod), kube-system/aws-node-2gfb7 uses hostPath (expected system pod), kube-system/aws-node-2gfb7 uses hostPath (expected system pod), kube-system/aws-node-kdzzv uses hostPath (expected system pod), kube-system/aws-node-kdzzv uses hostPath (expected system pod), kube-system/aws-node-kdzzv uses hostPath (expected system pod), kube-system/aws-node-kdzzv uses hostPath (expected system pod), kube-system/aws-node-kdzzv uses hostPath (expected system pod), kube-system/aws-node-kdzzv uses hostPath (expected system pod), kube-system/kube-proxy-bcdbc uses hostPath (expected system pod), kube-system/kube-proxy-bcdbc uses hostPath (expected system pod), kube-system/kube-proxy-bcdbc uses hostPath (expected system pod), kube-system/kube-proxy-c4wq4 uses hostPath (expected system pod), kube-system/kube-proxy-c4wq4 uses hostPath (expected system pod), kube-system/kube-proxy-c4wq4 uses hostPath (expected system pod)"
+    ]
+  },
+  "helm": {
+    "title": "Helm Audit",
+    "status": "\u2705 OK",
+    "messages": [
+      "1 releases (Helm v3.18.4+gd80839c)",
+      "kube-system/metrics-server: chart metrics-server version 3.13.0 (status deployed) \u2192 latest 3.13.0 (up-to-date); appVersion 0.8.0"
+    ]
+  },
+  "ci_cd": {
+    "title": "CI/CD",
+    "status": "\ud83d\uded1 Failure",
+    "messages": [
+      "1 failures, 0 flaky, 1.6m avg, longest: train, 0 bot jobs, branch protection: \u2705",
+      "CI commits: 07894ab 1851ed0 293a699 33395a9 d37592c"
+    ]
+  },
+  "docker": {
+    "title": "Docker Audit",
+    "status": "\u2705 OK",
+    "messages": [
+      "4 image-tags checked across 1 repo(s); 0 not found; 0 errors",
+      "gantagouthamyadav/inference-api:33395a9 \u2192 132.22 MB; CVEs (SIMULATED) C:0 H:2 M:4 L:6",
+      "gantagouthamyadav/inference-api:2d64222 \u2192 132.22 MB; CVEs (SIMULATED) C:0 H:0 M:1 L:2",
+      "gantagouthamyadav/inference-api:a842f7f \u2192 135.17 MB; CVEs (SIMULATED) C:0 H:0 M:0 L:0",
+      "gantagouthamyadav/inference-api:272cda5 \u2192 135.17 MB; CVEs (SIMULATED) C:0 H:0 M:1 L:2"
+    ]
+  },
+  "secrets": {
+    "title": "Secrets Audit",
+    "status": "\ud83d\udd34 Critical",
+    "messages": [
+      "\ud83d\udd10 GitHub Secrets: 5 total, 0 used, 5 unused",
+      "\ud83d\udd38 Unused: DOCKER_PASSWORD, AWS_ACCESS_KEY_ID, DOCKER_USERNAME, AWS_***REDACTED***, GH_PAT",
+      "\ud83d\udd11 K8s Secrets: 5, Sensitive: 3, Unused: 1",
+      "\u2757 Sensitive: argocd/argocd-initial-admin-secret \u27a4 keys: ['password'], argocd/argocd-redis \u27a4 keys: ['auth'], argocd/argocd-secret \u27a4 keys: ['accounts.snapcheck.tokens', 'admin.password', 'admin.passwordMtime', 'server.secretkey', 'tls.crt', 'tls.key']...",
+      "\u267b\ufe0f Unused: argocd/argocd-notifications-secret (empty)...",
+      "\ud83e\uddec Hardcoded secrets in codebase: 1431",
+      "\ud83e\udde8 Example: ./config/accessors.py:6 \u27a4 KeyPath = Sequence[str]"
+    ]
+  },
+  "cost": {
+    "title": "AWS Cost Analysis",
+    "status": "\u2705 OK",
+    "messages": [
+      "\ud83e\uddfe Total cost for last month: $17.46 \ud83d\udfe2",
+      "\ud83d\udccd AWS Region: us-east-2",
+      "\ud83d\udd27 Resource Types: 16",
+      "\ud83e\uddf1 EC2 Instance Types: N/A",
+      "\u2022 Amazon Elastic Compute Cloud - Compute \u27a4 $   7.27 \ud83d\udfe2",
+      "\u2022 Amazon Elastic Container Service for Kubernetes \u27a4 $   5.63 \ud83d\udfe2",
+      "\u2022 EC2 - Other                    \u27a4 $   2.69 \ud83d\udfe2",
+      "\u2022 Amazon Virtual Private Cloud   \u27a4 $   1.79 \ud83d\udfe2",
+      "\u2022 AWS Key Management Service     \u27a4 $   0.08 \ud83d\udfe2",
+      "\u2022 AWS Cost Explorer              \u27a4 $   0.01 \ud83d\udfe2",
+      "\u2022 Amazon Elastic Load Balancing  \u27a4 $   0.00 \ud83d\udfe2",
+      "\u2022 Amazon DynamoDB                \u27a4 $   0.00 \ud83d\udfe2",
+      "..."
+    ]
+  },
+  "gitops": [
+    {
+      "title": "GitOps - ArgoCD App: inference-service",
+      "status": "\u2705 OK",
+      "messages": [
+        "Sync Status: Synced",
+        "Health Status: Healthy",
+        "Auto-Sync: Enabled",
+        "Self-Heal: Enabled",
+        "Revision: 33395a90 | Target: HEAD",
+        "Last Sync: 2025-08-12T04:42:58Z",
+        "Auto Syncs: 2, Manual Syncs: 0",
+        "Drifted Resources: 0",
+        "Author: unknown",
+        "Linked to CI revision: 33395a90",
+        "Stub: values.yaml drift not detected"
+      ]
+    }
+  ],
+  "correlation": [
+    {
+      "title": "Root Cause Correlation",
+      "status": "\u2705 OK",
+      "messages": [
+        "\ud83d\udd17 GitOps app inference-service at revision 33395a9 matches Docker tag gantagouthamyadav/inference-api:33395a9.",
+        "\u2139\ufe0f CI data present on disk (ci_cd.json)."
+      ]
+    },
+    {
+      "title": "Infra Drift Detection",
+      "status": "\u2705 OK",
+      "messages": [
+        "Terraform state not found (skipped drift check)."
+      ]
+    },
+    {
+      "title": "Change Velocity",
+      "status": "\u2705 OK",
+      "messages": [
+        "Total recent deployments: 0"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Kubernetes Cluster Audit",
+  "status": "\ud83d\udfe1 Warning",
+  "messages": [
+    "\ud83d\udcc8 Metrics API OK: `kubectl top nodes` succeeded.",
+    "\ud83e\uddea DNS OK inside pod aws-node-2gfb7 (aws-node)",
+    "\ud83d\udd10 Privileged containers: kube-system/aws-node-2gfb7 (expected system pod), kube-system/aws-node-kdzzv (expected system pod), kube-system/kube-proxy-bcdbc (expected system pod), kube-system/kube-proxy-c4wq4 (expected system pod)",
+    "\u26a0\ufe0f HostPath volumes: kube-system/aws-node-2gfb7 uses hostPath (expected system pod), kube-system/aws-node-2gfb7 uses hostPath (expected system pod), kube-system/aws-node-2gfb7 uses hostPath (expected system pod), kube-system/aws-node-2gfb7 uses hostPath (expected system pod), kube-system/aws-node-2gfb7 uses hostPath (expected system pod), kube-system/aws-node-2gfb7 uses hostPath (expected system pod), kube-system/aws-node-kdzzv uses hostPath (expected system pod), kube-system/aws-node-kdzzv uses hostPath (expected system pod), kube-system/aws-node-kdzzv uses hostPath (expected system pod), kube-system/aws-node-kdzzv uses hostPath (expected system pod), kube-system/aws-node-kdzzv uses hostPath (expected system pod), kube-system/aws-node-kdzzv uses hostPath (expected system pod), kube-system/kube-proxy-bcdbc uses hostPath (expected system pod), kube-system/kube-proxy-bcdbc uses hostPath (expected system pod), kube-system/kube-proxy-bcdbc uses hostPath (expected system pod), kube-system/kube-proxy-c4wq4 uses hostPath (expected system pod), kube-system/kube-proxy-c4wq4 uses hostPath (expected system pod), kube-system/kube-proxy-c4wq4 uses hostPath (expected system pod)"
+  ]
+}

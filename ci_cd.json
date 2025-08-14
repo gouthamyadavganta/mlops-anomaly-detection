@@ -3,10 +3,10 @@
   "title": "CI/CD",
   "platform": "github",
   "repo": "gouthamyadavganta/mlops-anomaly-detection",
-  "timestamp": 1755176091,
+  "timestamp": 1755188803,
   "status": "Failure",
   "errors": [],
-  "summary": "1 failures, 0 flaky, 1.6m avg, longest: train, 0 bot jobs, branch protection: \u2705",
+  "summary": "1 failures, 0 flaky, 1.5m avg, longest: train, 0 bot jobs, branch protection: \u274c",
   "metrics": {
     "total_runs": 10,
     "failed_runs": 1,
@@ -14,14 +14,18 @@
       "name": "train",
       "duration": 4.97
     },
-    "avg_duration_min": 1.6,
-    "avg_latency_min": 1.6,
+    "avg_duration_min": 1.5,
+    "avg_latency_min": 1.5,
     "contributors": {
       "gouthamyadavganta": 10
     },
     "flaky_runs": 0,
-    "artifact_summary": "55 artifacts, avg size: 0.18 MB",
+    "artifact_summary": "56 artifacts, avg size: 0.18 MB",
     "artifact_trend": [
+      [
+        "2025-08-14T12:56:46Z",
+        0.04
+      ],
       [
         "2025-08-14T08:47:43Z",
         0.01
@@ -244,10 +248,10 @@
       ]
     ],
     "bot_triggered_jobs": 0,
-    "branch_protection": true,
+    "branch_protection": false,
     "repo": "gouthamyadavganta/mlops-anomaly-detection",
     "platform": "github"
   },
-  "outdir": "/home/ubuntu/snapcheck-cli/.snapcheck",
+  "outdir": "/home/ubuntu/snapdemo/.snapcheck",
   "schema_version": 1
 }

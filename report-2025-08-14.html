@@ -77,7 +77,7 @@
             
           </div>
           
-            <div style="font-size:12px; opacity:.7;">Audit: 2025-08-14 12:54:56</div>
+            <div style="font-size:12px; opacity:.7;">Audit: 2025-08-14 16:26:46</div>
           
         </div>
       </div>
@@ -253,7 +253,9 @@
               <strong class="text-sm">Infra Drift Detection</strong>
               <span class="sc-pill sc-pill--INFO">INFO</span>
             </div>
-            <p class="text-sm mt-1 whitespace-pre-wrap">Terraform state not found (skipped drift check).</p>
+            <p class="text-sm mt-1 whitespace-pre-wrap">⚠️ EC2 i-0fe2ed952aa99ca1d in AWS but not managed by Terraform
+⚠️ EC2 i-04b3d1bb8091c0df5 in AWS but not managed by Terraform
+⚠️ EC2 i-01800bfdab85424ef in AWS but not managed by Terraform</p>
             
           </article>
           
@@ -461,8 +463,8 @@ kube-system/metrics-server: chart metrics-server version 3.13.0 (status deployed
                 <strong class="text-sm">CI/CD</strong>
                 <span class="sc-pill sc-pill--INFO">INFO</span>
               </div>
-              <p class="text-sm mt-1 whitespace-pre-wrap">1 failures, 0 flaky, 1.6m avg, longest: train, 0 bot jobs, branch protection: ✅
-CI commits: 07894ab 1851ed0 293a699 33395a9 d37592c</p>
+              <p class="text-sm mt-1 whitespace-pre-wrap">1 failures, 0 flaky, 1.5m avg, longest: train, 0 bot jobs, branch protection: ❌
+CI commits: 07894ab 1851ed0 242874d 293a699 33395a9</p>
               
             </article>
             
@@ -506,11 +508,12 @@ CI commits: 07894ab 1851ed0 293a699 33395a9 d37592c</p>
                 <strong class="text-sm">Docker Audit</strong>
                 <span class="sc-pill sc-pill--INFO">INFO</span>
               </div>
-              <p class="text-sm mt-1 whitespace-pre-wrap">4 image-tags checked across 1 repo(s); 0 not found; 0 errors
+              <p class="text-sm mt-1 whitespace-pre-wrap">5 image-tags checked across 1 repo(s); 0 not found; 0 errors
 gantagouthamyadav/inference-api:33395a9 → 132.22 MB; CVEs (SIMULATED) C:0 H:2 M:4 L:6
 gantagouthamyadav/inference-api:2d64222 → 132.22 MB; CVEs (SIMULATED) C:0 H:0 M:1 L:2
 gantagouthamyadav/inference-api:a842f7f → 135.17 MB; CVEs (SIMULATED) C:0 H:0 M:0 L:0
-gantagouthamyadav/inference-api:272cda5 → 135.17 MB; CVEs (SIMULATED) C:0 H:0 M:1 L:2</p>
+gantagouthamyadav/inference-api:272cda5 → 135.17 MB; CVEs (SIMULATED) C:0 H:0 M:1 L:2
+gantagouthamyadav/inference-api:07b92cc → 135.17 MB; CVEs (SIMULATED) C:1 H:2 M:5 L:8</p>
               
             </article>
             
@@ -554,13 +557,11 @@ gantagouthamyadav/inference-api:272cda5 → 135.17 MB; CVEs (SIMULATED) C:0 H:0 
                 <strong class="text-sm">Secrets Audit</strong>
                 <span class="sc-pill sc-pill--INFO">INFO</span>
               </div>
-              <p class="text-sm mt-1 whitespace-pre-wrap">🔐 GitHub Secrets: 5 total, 0 used, 5 unused
-🔸 Unused: DOCKER_PASSWORD, AWS_ACCESS_KEY_ID, DOCKER_USERNAME, AWS_***REDACTED***, GH_PAT
+              <p class="text-sm mt-1 whitespace-pre-wrap">🔐 GitHub Secrets: 0 total, 0 used, 0 unused
 🔑 K8s Secrets: 5, Sensitive: 3, Unused: 1
 ❗ Sensitive: argocd/argocd-initial-admin-secret ➤ keys: [&#39;password&#39;], argocd/argocd-redis ➤ keys: [&#39;auth&#39;], argocd/argocd-secret ➤ keys: [&#39;accounts.snapcheck.tokens&#39;, &#39;admin.password&#39;, &#39;admin.passwordMtime&#39;, &#39;server.secretkey&#39;, &#39;tls.crt&#39;, &#39;tls.key&#39;]...
 ♻️ Unused: argocd/argocd-notifications-secret (empty)...
-🧬 Hardcoded secrets in codebase: 1431
-🧨 Example: ./config/accessors.py:6 ➤ KeyPath = Sequence[str]</p>
+🧬 Hardcoded secrets in codebase: 0</p>
               
             </article>
             
@@ -605,7 +606,7 @@ gantagouthamyadav/inference-api:272cda5 → 135.17 MB; CVEs (SIMULATED) C:0 H:0 
                 <span class="sc-pill sc-pill--INFO">INFO</span>
               </div>
               <p class="text-sm mt-1 whitespace-pre-wrap">🧾 Total cost for last month: $17.46 🟢
-📍 AWS Region: us-east-2
+📍 AWS Region: us-east-1
 🔧 Resource Types: 16
 🧱 EC2 Instance Types: N/A
 • Amazon Elastic Compute Cloud - Compute ➤ $   7.27 🟢

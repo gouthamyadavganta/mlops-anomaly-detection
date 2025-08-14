@@ -3,7 +3,7 @@
   "status": "\u2705 OK",
   "messages": [
     "\ud83e\uddfe Total cost for last month: $17.46 \ud83d\udfe2",
-    "\ud83d\udccd AWS Region: us-east-2",
+    "\ud83d\udccd AWS Region: us-east-1",
     "\ud83d\udd27 Resource Types: 16",
     "\ud83e\uddf1 EC2 Instance Types: N/A",
     "\u2022 Amazon Elastic Compute Cloud - Compute \u27a4 $   7.27 \ud83d\udfe2",

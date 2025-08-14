@@ -1,6 +1,6 @@
 {
   "module": "helm",
-  "outdir": "/home/ubuntu/snapcheck-cli/.snapcheck",
+  "outdir": "/home/ubuntu/snapdemo/.snapcheck",
   "helm_version": "v3.18.4+gd80839c",
   "status": "OK",
   "releases": [

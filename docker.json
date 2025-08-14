@@ -1,7 +1,7 @@
 {
   "module": "docker",
-  "outdir": "/home/ubuntu/snapcheck-cli/.snapcheck",
-  "timestamp": 1755176092,
+  "outdir": "/home/ubuntu/snapdemo/.snapcheck",
+  "timestamp": 1755188804,
   "images": [
     {
       "repo": "gantagouthamyadav/inference-api",
@@ -66,14 +66,31 @@
         "medium": 1,
         "low": 2
       }
+    },
+    {
+      "repo": "gantagouthamyadav/inference-api",
+      "tag": "07b92cc",
+      "found": true,
+      "size_mb": 135.17,
+      "last_updated": "2025-07-16T08:57:40.431588Z",
+      "errors": [],
+      "vulnerabilities": {
+        "simulated": true,
+        "note": "CVEs are simulated for MVP",
+        "critical": 1,
+        "high": 2,
+        "medium": 5,
+        "low": 8
+      }
     }
   ],
   "messages": [
-    "4 image-tags checked across 1 repo(s); 0 not found; 0 errors",
+    "5 image-tags checked across 1 repo(s); 0 not found; 0 errors",
     "gantagouthamyadav/inference-api:33395a9 \u2192 132.22 MB; CVEs (SIMULATED) C:0 H:2 M:4 L:6",
     "gantagouthamyadav/inference-api:2d64222 \u2192 132.22 MB; CVEs (SIMULATED) C:0 H:0 M:1 L:2",
     "gantagouthamyadav/inference-api:a842f7f \u2192 135.17 MB; CVEs (SIMULATED) C:0 H:0 M:0 L:0",
-    "gantagouthamyadav/inference-api:272cda5 \u2192 135.17 MB; CVEs (SIMULATED) C:0 H:0 M:1 L:2"
+    "gantagouthamyadav/inference-api:272cda5 \u2192 135.17 MB; CVEs (SIMULATED) C:0 H:0 M:1 L:2",
+    "gantagouthamyadav/inference-api:07b92cc \u2192 135.17 MB; CVEs (SIMULATED) C:1 H:2 M:5 L:8"
   ],
   "errors": [],
   "not_found": [],

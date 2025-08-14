@@ -1,7 +1,7 @@
 {
   "module": "kubernetes",
-  "outdir": "/home/ubuntu/snapcheck-cli/.snapcheck",
-  "when": "2025-08-14T12:54:46.137061Z",
+  "outdir": "/home/ubuntu/snapdemo/.snapcheck",
+  "when": "2025-08-14T16:26:38.411680Z",
   "results": [
     "\ud83d\udcc8 Metrics API OK: `kubectl top nodes` succeeded.",
     "\ud83e\uddea DNS OK inside pod aws-node-2gfb7 (aws-node)",

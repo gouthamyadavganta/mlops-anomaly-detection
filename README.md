@@ -271,6 +271,4 @@ python simulate_stream.py
 
 💻 **Author:** Goutham Yadav Ganta  
 🌐 **GitHub:** [gouthamyadavganta](https://github.com/gouthamyadavganta)  
-💼 **LinkedIn:** [www.linkedin.com/in/goutham-g-70408b228]  
-📧 **Email:** gouthamyganta@gmail.com  
 📍 **Location:** United States  
